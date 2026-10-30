@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stem Cell Lab</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a201d" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-title" content="Stem Cell Lab">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%232c6a57'/%3E%3Cpath d='M16 9h8M17.5 9v8.5L11 28.5A2.4 2.4 0 0 0 13 32h14a2.4 2.4 0 0 0 2-3.5L22.5 17.5V9' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M14 25h12' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f4f6f5; --card:#ffffff; --ink:#1b2320; --muted:#65706b; --line:#e0e5e2; --field:#f8faf9;
+  --accent:#2c6a57; --accent-ink:#ffffff; --accent-soft:#e1eee8;
+  --red:#b42318; --red-soft:#fdeceb; --amber:#8a5200; --amber-soft:#fff1d6;
+  --blue:#1f5c9e; --blue-soft:#e6effa; --green:#25704a; --green-soft:#e2f2e8;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111513; --card:#1a201d; --ink:#e6ebe8; --muted:#9aa6a0; --line:#2a332f; --field:#141916;
+    --accent:#6dbea2; --accent-ink:#0b1a14; --accent-soft:#1d3a30;
+    --red:#ff8a80; --red-soft:#3b1c1a; --amber:#f0bf63; --amber-soft:#372a10;
+    --blue:#8db8ef; --blue-soft:#172a40; --green:#7fd0a0; --green-soft:#153322;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+header.top{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;gap:12px;padding:10px 16px 4px;max-width:980px;margin:0 auto}
+.brand{flex:1;min-width:0;font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.me{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.me select{max-width:42vw;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--field);font-weight:600;color:var(--ink)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;padding:0 10px;max-width:980px;margin:0 auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:9px 10px 8px;color:var(--muted);font-weight:600;white-space:nowrap;cursor:pointer}
+nav.tabs button.on{color:var(--accent);border-bottom-color:var(--accent)}
+nav.tabs .cnt{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:9px;background:var(--red);color:#fff;font-size:11px;line-height:18px;text-align:center}
+#busy{height:2px;background:transparent;overflow:hidden}
+#busy.on{background:linear-gradient(90deg,transparent,var(--accent),transparent);background-size:40% 100%;background-repeat:no-repeat;animation:slide 1s linear infinite}
+@keyframes slide{from{background-position:-40% 0}to{background-position:140% 0}}
+main{max-width:980px;margin:0 auto;padding:14px 16px 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:22px 4px 8px;font-weight:700}
+h3{margin:0;font-size:16px;line-height:1.3}
+p{margin:6px 0}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.grow{flex:1;min-width:0}
+.meta{color:var(--muted);font-size:13px}
+.t{font-weight:600}
+.variant{font-weight:500;color:var(--muted)}
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;vertical-align:middle}
+.b-red{background:var(--red-soft);color:var(--red)}
+.b-amber{background:var(--amber-soft);color:var(--amber)}
+.b-blue{background:var(--blue-soft);color:var(--blue)}
+.b-green{background:var(--green-soft);color:var(--green)}
+.b-grey{background:var(--line);color:var(--muted)}
+.btn{appearance:none;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 12px;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;line-height:1.2}
+.btn:hover{border-color:var(--muted)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.small{padding:5px 10px;font-size:13px}
+.btn.ghost{background:none;border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--ink)}
+.btn.danger{color:var(--red)}
+.btn.danger-fill{background:var(--red);border-color:var(--red);color:#fff}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted)}
+.chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.li:first-child{border-top:0;padding-top:2px}
+.li:last-child{padding-bottom:2px}
+.li .grow{min-width:180px}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.duty-name{font-size:22px;font-weight:700;margin:2px 0 2px}
+.duty{border-color:var(--accent)}
+.tick{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}
+.tick.done{background:var(--green-soft);color:var(--green)}
+.tick.todo{border:2px solid var(--accent)}
+.tick.later{border:2px dashed var(--line)}
+.tick.late{border:2px solid var(--red)}
+.toolbar{margin-bottom:10px}
+.filters{margin-bottom:12px}
+.filters input{flex:1;min-width:180px}
+.filters select{width:auto;max-width:48%}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;padding:7px 12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--accent-ink)}
+.item-head{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.qty{text-align:right;font-weight:700;font-size:18px;white-space:nowrap}
+.qty small{display:block;font-size:12px;font-weight:500;color:var(--muted)}
+.badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.details{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 14px;margin:12px 0 4px;font-size:13px}
+.details div span{display:block;color:var(--muted);font-size:12px}
+.batch{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;background:var(--field)}
+.batch .row{gap:6px}
+.cstat{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.cstat button{border:0;background:var(--card);padding:5px 10px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-left:1px solid var(--line)}
+.cstat button:first-child{border-left:0}
+.cstat button.on.ok{background:var(--green-soft);color:var(--green)}
+.cstat button.on.low{background:var(--amber-soft);color:var(--amber)}
+.cstat button.on.out{background:var(--red-soft);color:var(--red)}
+.week{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.week:first-child{border-top:0}
+.week.now{background:var(--accent-soft);margin:0 -16px;padding:10px 16px;border-radius:8px;border-top:0}
+.week .when{width:130px;font-size:13px;color:var(--muted)}
+.week .who{flex:1;min-width:120px;font-weight:600}
+ol.order{margin:6px 0 0;padding-left:22px}
+ol.order li{padding:2px 0}
+.empty{color:var(--muted);text-align:center;padding:24px 8px}
+.log-e{padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.log-e:first-child{border-top:0}
+.log-e .meta{font-size:12px}
+/* modal */
+.modal-back{position:fixed;inset:0;background:rgba(10,15,13,.45);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.modal-back.open{display:flex}
+.modal{background:var(--card);width:100%;max-width:540px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:16px 16px 18px}
+@media (min-width:620px){.modal-back{align-items:center}.modal{border-radius:16px}}
+.mhead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mhead h3{flex:1}
+.x{border:0;background:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer;padding:0 4px}
+.mfoot{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;align-items:center}
+.mfoot .left{margin-right:auto}
+.f{margin-bottom:11px}
+.f label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.f input,.f select,.f textarea,.filters input,.filters select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--ink)}
+.f input:focus,.f select:focus,.f textarea:focus,.filters input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.f.check label{display:flex;gap:8px;align-items:center;font-weight:500;font-size:14px}
+.f.check input{width:18px;height:18px;margin:0}
+.help{font-size:12px;color:var(--muted);margin-top:3px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.fsec{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin:16px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+.ck{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.ck:first-of-type{border-top:0}
+.seg3{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none}
+.seg3 label{cursor:pointer}
+.seg3 input{position:absolute;opacity:0;pointer-events:none}
+.seg3 span{display:block;padding:6px 10px;font-size:13px;font-weight:600;color:var(--muted);border-left:1px solid var(--line)}
+.seg3 label:first-child span{border-left:0}
+.seg3 input:checked + span.ok{background:var(--green-soft);color:var(--green)}
+.seg3 input:checked + span.low{background:var(--amber-soft);color:var(--amber)}
+.seg3 input:checked + span.out{background:var(--red-soft);color:var(--red)}
+.pair{max-width:440px;margin:24px auto}
+.pair .lock{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.pair input[name=code]{font-size:20px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;text-align:center}
+.err{color:var(--red);font-weight:600;font-size:14px}
+.code{font:700 34px/1.1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em;text-align:center;padding:18px 10px;margin:8px 0 12px;border:2px dashed var(--accent);border-radius:12px;background:var(--accent-soft);color:var(--accent)}
+body.locked .me, body.locked nav.tabs{display:none}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--ink);color:var(--card);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;transition:.2s;z-index:30;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.err{background:var(--red);color:#fff}
+@media (max-width:520px){
+  .week .when{width:100%}
+  .qty{font-size:16px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-row">
+    <div class="brand">Stem Cell Lab<small>Stocks &amp; maintenance</small></div>
+    <label class="me"><span>I am</span><select id="me" aria-label="Who are you?"></select></label>
+  </div>
+  <nav class="tabs" id="tabs"></nav>
+  <div id="busy"></div>
+</header>
+<main id="view"><div class="empty">Loading…</div></main>
+<div class="modal-back" id="modal"><div class="modal" id="modal-body" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ───────── connection ───────── */
+// Paste your Apps Script web app URL here (Deploy → Manage deployments → Web app URL, ends in /exec):
+const API_URL = 'https://script.google.com/macros/s/AKfycbwrRJlkfroBblrDPCNCuuYtvthCmlP1Gu2mPczfI1D4OwPfiPeq/exec';
+
+/* ───────── settings ───────── */
+const EXPIRY_WARN_DAYS = 30;   // batches expiring within this many days show up on Home
+const DUE_SOON_DAYS = 14;      // maintenance due within this many days shows up on Home
+
+const REAGENT_CATS = ['Matrix / coating', 'Media', 'Supplements', 'Growth factors & cytokines', 'Small molecules',
+  'Dissociation & passaging', 'Buffers & salts', 'Antibiotics', 'Cryopreservation', 'Other'];
+const CONSUMABLE_CATS = ['Pipettes & tips', 'Tubes', 'Plates & dishes', 'Gloves & PPE', 'Cleaning', 'Other'];
+const TEMPS = ['', 'Room temp.', '4 °C', '−20 °C', '−80 °C', 'LN₂'];
+const ROLES = ['Member', 'Intern', 'Technician', 'PhD student', 'Postdoc', 'Group leader', 'Lab manager'];
+const TASK_CATS = ['Equipment', 'Cells', 'Cleaning', 'Stock', 'Safety', 'Other'];
+const TEMPLATES = [
+  { name: 'ContraCon decontamination', equipment: 'Incubator 2', every: 6, unit: 'months', category: 'Equipment' },
+  { name: 'Refill incubator water pan', equipment: 'Incubators', every: 2, unit: 'weeks', category: 'Equipment' },
+  { name: 'Check CO₂ bottles', equipment: 'CO₂ supply', every: 1, unit: 'weeks', category: 'Equipment' },
+  { name: 'Biosafety cabinet certification', equipment: 'Hoods', every: 12, unit: 'months', category: 'Safety' },
+  { name: 'Refill liquid nitrogen tank', equipment: 'LN₂ tank', every: 1, unit: 'weeks', category: 'Equipment' },
+  { name: 'Check fridge & freezer temperatures', equipment: 'Fridges / freezers', every: 1, unit: 'weeks', category: 'Equipment' },
+  { name: 'Defrost −80 °C freezer', equipment: '−80 °C freezer', every: 12, unit: 'months', category: 'Equipment' },
+  { name: 'Pipette calibration', equipment: 'Pipettes', every: 12, unit: 'months', category: 'Equipment' },
+  { name: 'Clean centrifuge', equipment: 'Centrifuge', every: 1, unit: 'months', category: 'Cleaning' },
+  { name: 'Clean microscope', equipment: 'Culture microscope', every: 1, unit: 'months', category: 'Cleaning' }
+];
+
+/* ───────── state ───────── */
+const LS = {
+  get(k) { try { return localStorage.getItem('scl_' + k); } catch (e) { return null; } },
+  set(k, v) { try { v == null || v === '' ? localStorage.removeItem('scl_' + k) : localStorage.setItem('scl_' + k, v); } catch (e) {} }
+};
+let S = null, lastLoad = 0, busyN = 0;
+let me = LS.get('me') || '';
+let TOKEN = LS.get('token') || '';
+const CAN_STORE = (() => { try { localStorage.setItem('scl_t', '1'); localStorage.removeItem('scl_t'); return true; } catch (e) { return false; } })();
+let tab = LS.get('tab') || 'home';
+const ui = { kind: 'reagent', q: '', cat: '', mine: LS.get('mine') === '1', open: {}, logQ: '', showFormer: false };
+const $ = s => document.querySelector(s);
+
+/* ───────── dates (all 'yyyy-mm-dd' strings) ───────── */
+const DAY = 864e5;
+const dp = s => { const a = s.split('-').map(Number); return Date.UTC(a[0], a[1] - 1, a[2]); };
+const df = t => new Date(t).toISOString().slice(0, 10);
+const addDays = (s, n) => df(dp(s) + n * DAY);
+const addMonths = (s, n) => { const a = s.split('-').map(Number); const m = a[1] - 1 + n; const last = new Date(Date.UTC(a[0], m + 1, 0)).getUTCDate(); return df(Date.UTC(a[0], m, Math.min(a[2], last))); };
+const addEvery = (s, every, unit) => { const n = Number(every) || 0; return unit === 'months' ? addMonths(s, n) : addDays(s, unit === 'weeks' ? n * 7 : n); };
+const ddiff = (a, b) => Math.round((dp(a) - dp(b)) / DAY);
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function pretty(s, withYear) {
+  if (!s) return '';
+  const d = new Date(dp(s));
+  const y = d.getUTCFullYear();
+  return d.getUTCDate() + ' ' + MON[d.getUTCMonth()] + (withYear || y !== +S.today.slice(0, 4) ? ' ' + y : '');
+}
+function rel(s) {
+  const n = ddiff(s, S.today);
+  if (n === 0) return 'today';
+  if (n === 1) return 'tomorrow';
+  if (n === -1) return 'yesterday';
+  if (n > 0) return n <= 45 ? 'in ' + n + ' days' : 'on ' + pretty(s);
+  return -n <= 45 ? -n + ' days ago' : 'on ' + pretty(s);
+}
+const weekLabel = w => pretty(w) + ' – ' + pretty(addDays(w, 6));
+const everyText = t => { const n = Number(t.every); const u = t.unit || 'days'; return n === 1 ? 'every ' + u.replace(/s$/, '') : 'every ' + n + ' ' + u; };
+
+/* ───────── helpers ───────── */
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtNum = n => Number.isInteger(n) ? String(n) : String(Math.round(n * 100) / 100);
+const isActive = p => p.active && !p.left && (!p.endDate || p.endDate >= S.today);
+const activePeople = () => S.people.filter(isActive);
+const person = id => S.people.find(p => p.id === id);
+const item = id => S.items.find(i => i.id === id);
+const batch = id => S.batches.find(b => b.id === id);
+const task = id => S.tasks.find(t => t.id === id);
+function pname(id) {
+  if (!id) return '';
+  if (id === 'DUTY') return 'Weekly duty';
+  const p = person(id);
+  return p ? p.name + (isActive(p) ? '' : ' (left)') : 'unknown';
+}
+const label = it => it.name + (it.variant ? ' (' + it.variant + ')' : '');
+const titleHtml = it => esc(it.name) + (it.variant ? ' <span class="variant">' + esc(it.variant) + '</span>' : '');
+const taskLabel = t => t.name + (t.equipment ? ' – ' + t.equipment : '');
+const cmp = (a, b) => String(a).localeCompare(String(b), undefined, { numeric: true, sensitivity: 'base' });
+const withCurrent = (list, cur) => cur && list.indexOf(cur) < 0 ? list.concat([cur]) : list;
+const errMsg = e => String((e && e.message) || e || 'Something went wrong').replace(/^(Exception|Error|ScriptError):\s*/i, '');
+
+function effExpiry(b, it) {
+  const c = [];
+  if (b.expiry) c.push(b.expiry);
+  if (b.opened && it.shelfLifeOpenedDays !== '' && it.shelfLifeOpenedDays != null) c.push(addDays(b.opened, Number(it.shelfLifeOpenedDays)));
+  c.sort();
+  return c[0] || '';
+}
+function itemInfo(it) {
+  if (it.kind === 'consumable') {
+    const bad = it.checkStatus === 'low' || it.checkStatus === 'out';
+    const ordered = it.orderStatus === 'ordered';
+    const needs = !ordered && (bad || it.orderStatus === 'to_order');
+    const reason = it.checkStatus === 'out' ? 'Marked out' : it.checkStatus === 'low' ? 'Marked low' : 'Flagged to order';
+    return { needs, ordered, reason: reason + (bad && it.lastChecked ? ' ' + rel(it.lastChecked) : ''), bs: [], expired: [], expiring: [] };
+  }
+  const bs = S.batches.filter(b => b.itemId === it.id).map(b => {
+    const eff = effExpiry(b, it);
+    return Object.assign({}, b, { eff, days: eff ? ddiff(eff, S.today) : null, byOpening: !!(eff && eff !== b.expiry) });
+  }).sort((a, b) => (a.eff || '9999') < (b.eff || '9999') ? -1 : 1);
+  const usable = bs.filter(b => !(b.eff && b.days < 0));
+  const total = usable.reduce((s, b) => s + (Number(b.qty) || 0), 0);
+  const expiredQty = bs.filter(b => b.eff && b.days < 0).reduce((s, b) => s + (Number(b.qty) || 0), 0);
+  const min = it.minQty === '' || it.minQty == null ? null : Number(it.minQty);
+  const out = total <= 0;
+  const low = !out && min !== null && total <= min;
+  const ordered = it.orderStatus === 'ordered';
+  const needs = !ordered && (out || low || it.orderStatus === 'to_order');
+  const unit = it.unit || '';
+  const reason = out ? 'Out of stock' : low ? 'Low: ' + fmtNum(total) + ' ' + unit + ' left (reorder at ≤ ' + fmtNum(min) + ')' : 'Flagged to order';
+  return {
+    bs, total, expiredQty, min, out, low, ordered, needs, reason,
+    expired: bs.filter(b => b.eff && b.days < 0),
+    expiring: bs.filter(b => b.eff && b.days >= 0 && b.days <= EXPIRY_WARN_DAYS)
+  };
+}
+function taskInfo(t) {
+  const next = t.lastDone ? addEvery(t.lastDone, t.every, t.unit) : '';
+  const days = next ? ddiff(next, S.today) : null;
+  const status = !next ? 'never' : days < 0 ? 'overdue' : days <= DUE_SOON_DAYS ? 'soon' : 'ok';
+  return { next, days, status };
+}
+function dueBadge(i) {
+  if (i.status === 'never') return '<span class="badge b-amber">No date yet</span>';
+  if (i.status === 'overdue') return '<span class="badge b-red">Overdue · ' + (i.days === -1 ? '1 day' : -i.days + ' days') + '</span>';
+  if (i.status === 'soon') return '<span class="badge b-amber">Due ' + rel(i.next) + '</span>';
+  return '<span class="badge b-green">Due ' + pretty(i.next) + '</span>';
+}
+function expBadge(b) {
+  if (!b.eff) return '';
+  const why = b.byOpening ? ' (opened)' : '';
+  if (b.days < 0) return '<span class="badge b-red">Expired' + why + ' ' + rel(b.eff) + '</span>';
+  if (b.days <= EXPIRY_WARN_DAYS) return '<span class="badge b-amber">Use by ' + pretty(b.eff) + why + '</span>';
+  return '';
+}
+
+/* ───────── server calls ───────── */
+function setBusy(d) { busyN += d; $('#busy').classList.toggle('on', busyN > 0); }
+async function rpc(action, ...args) {
+  setBusy(1);
+  try {
+    let res, j;
+    try {
+      // sent as text/plain so the browser makes a "simple" cross-site request to Google (no CORS preflight)
+      res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action, args, token: TOKEN }) });
+    } catch (e) { throw new Error('Can’t reach the lab server. Check the internet connection and try again.'); }
+    try { j = await res.json(); } catch (e) { throw new Error('The server gave an unexpected answer. Is the Apps Script web app deployed with access “Anyone”?'); }
+    if (!j.ok) { const err = new Error(j.error || 'Something went wrong'); err.auth = !!j.auth; throw err; }
+    return j.result;
+  } finally { setBusy(-1); }
+}
+async function act(fn, ...args) {
+  try {
+    const st = await rpc(fn, ...args, me);
+    S = st; lastLoad = Date.now();
+    render();
+    return st;
+  } catch (e) {
+    if (e.auth) lostAccess(e.message); else toast(errMsg(e), true);
+    throw e;
+  }
+}
+async function load(silent) {
+  if (!/^https?:\/\//.test(API_URL) && API_URL.charAt(0) !== '/') {
+    document.body.classList.add('locked');
+    $('#view').innerHTML = '<div class="card pair"><h3>Almost there</h3><p class="meta">This page isn’t connected to the Google Sheet yet. Paste the Apps Script web app URL into <b>index.html</b> (the line <code>const API_URL = …</code>) and reload.</p></div>';
+    return;
+  }
+  if (!TOKEN) return showPairing();
+  try {
+    const st = await rpc('getState');
+    S = st; lastLoad = Date.now();
+    if (me && !S.people.some(p => p.id === me && isActive(p))) { me = ''; LS.set('me', null); }
+    render();
+  } catch (e) {
+    if (e.auth) return lostAccess(e.message);
+    if (!silent) $('#view').innerHTML = '<div class="card"><h3>Couldn’t load the app</h3><p class="meta">' + esc(errMsg(e)) +
+      '</p><button class="btn" data-a="reload">Try again</button></div>';
+  }
+}
+function lostAccess(msg) {
+  TOKEN = ''; LS.set('token', null); S = null;
+  closeModal();
+  showPairing(msg);
+}
+function showPairing(msg) {
+  document.body.classList.add('locked');
+  $('#tabs').innerHTML = '';
+  $('#view').innerHTML = '<div class="card pair"><div class="lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>' +
+    '<h3>Unlock this device</h3><p class="meta">For security, each phone or computer has to be unlocked once with a one-time code. ' +
+    'Ask an admin for a code (in the app: People → Devices). Codes work once and expire after 48 hours.</p>' +
+    (msg && !/isn’t set up yet/.test(msg) ? '<p class="err">' + esc(msg) + '</p>' : '') +
+    '<form id="pairform" novalidate style="margin-top:14px">' +
+    '<div class="f"><label for="p_code">One-time code</label><input id="p_code" name="code" placeholder="XXXX-XXXX" maxlength="12" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false"></div>' +
+    '<div class="f"><label for="p_name">Name for this device</label><input id="p_name" name="name" maxlength="60" placeholder="e.g. Munisa’s phone, Lab iPad, Hood PC"></div>' +
+    '<p class="err" id="pair_err"></p>' +
+    '<button class="btn primary" style="width:100%;padding:11px">Unlock</button></form>' +
+    (CAN_STORE ? '' : '<p class="meta" style="margin-top:12px">Note: this browser doesn’t allow saving (private mode?), so you’d need a new code every time.</p>') + '</div>';
+}
+async function pair(form) {
+  const code = form.elements.code.value.trim(), name = form.elements.name.value.trim();
+  const errEl = $('#pair_err');
+  if (!code) { errEl.textContent = 'Enter the one-time code.'; form.elements.code.focus(); return; }
+  if (!name) { errEl.textContent = 'Give this device a name so admins can recognise it.'; form.elements.name.focus(); return; }
+  const btn = form.querySelector('button'); btn.disabled = true; errEl.textContent = '';
+  try {
+    const r = await rpc('pair', code, name);
+    TOKEN = r.token; LS.set('token', TOKEN);
+    document.body.classList.remove('locked');
+    $('#view').innerHTML = '<div class="empty">Unlocked – loading…</div>';
+    await load();
+    toast('This device is unlocked' + (r.device.admin ? ' (admin)' : ''));
+  } catch (e) { errEl.textContent = errMsg(e); btn.disabled = false; }
+}
+let toastTimer;
+function toast(msg, err) {
+  const el = $('#toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (err ? ' err' : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast' + (err ? ' err' : ''); }, err ? 5000 : 2500);
+}
+function need() {
+  if (me) return true;
+  toast('First pick your name at the top (or add yourself).', true);
+  $('#me').focus();
+  return false;
+}
+
+/* ───────── render ───────── */
+const TABS = [['home', 'Home'], ['stocks', 'Stocks'], ['tasks', 'Maintenance'], ['rotation', 'Rotation'], ['people', 'People'], ['log', 'Log']];
+function render() {
+  if (!S) return;
+  document.body.classList.remove('locked');
+  const people = activePeople();
+  $('#me').innerHTML = '<option value="">— pick your name —</option>' +
+    people.map(p => '<option value="' + p.id + '"' + (p.id === me ? ' selected' : '') + '>' + esc(p.name) + '</option>').join('') +
+    '<option value="__join">+ Add myself…</option>';
+  const urgent = homeCounts().urgent;
+  $('#tabs').innerHTML = TABS.map(([k, l]) => '<button data-a="tab" data-tab="' + k + '" class="' + (tab === k ? 'on' : '') + '">' + l +
+    (k === 'home' && urgent ? '<span class="cnt">' + urgent + '</span>' : '') + '</button>').join('');
+  const on = $('#tabs .on'), nav = $('#tabs');
+  if (on) { const r = on.getBoundingClientRect(), nr = nav.getBoundingClientRect(); if (r.left < nr.left || r.right > nr.right) nav.scrollLeft += r.left - nr.left - 16; }
+  const views = { home: vHome, stocks: vStocks, tasks: vTasks, rotation: vRotation, people: vPeople, log: vLog };
+  $('#view').innerHTML = (views[tab] || vHome)();
+}
+function homeCounts() {
+  let urgent = 0;
+  S.tasks.forEach(t => { if (taskInfo(t).status === 'overdue') urgent++; });
+  S.items.forEach(it => { const i = itemInfo(it); if (i.needs) urgent++; urgent += i.expired.length; });
+  return { urgent };
+}
+
+/* Home */
+function vHome() {
+  const out = [];
+  if (!me) {
+    out.push('<div class="card"><h3>Welcome!</h3><p class="meta">Pick your name at the top so everything you do is logged under you. New here (e.g. intern)? Add yourself — and remove yourself on People when you leave.</p>' +
+      '<div class="actions"><button class="btn primary" data-a="join">Add myself</button></div></div>');
+  }
+  out.push(dutyCard());
+  const mine = ui.mine && me;
+  const tasks = S.tasks.filter(t => t.responsible !== 'DUTY' && (!mine || t.responsible === me)).map(t => ({ t, i: taskInfo(t) }));
+  const byNext = (a, b) => a.i.next < b.i.next ? -1 : 1;
+  const overdue = tasks.filter(x => x.i.status === 'overdue').sort(byNext);
+  const soon = tasks.filter(x => x.i.status === 'soon').sort(byNext);
+  const never = tasks.filter(x => x.i.status === 'never');
+  const items = S.items.filter(it => !mine || it.ownerId === me).map(it => ({ it, i: itemInfo(it) }));
+  const toOrder = items.filter(x => x.i.needs);
+  const ordered = items.filter(x => x.i.ordered);
+  const exp = [];
+  items.forEach(x => [].concat(x.i.expired, x.i.expiring).forEach(b => exp.push({ it: x.it, b })));
+  exp.sort((a, b) => a.b.eff < b.b.eff ? -1 : 1);
+
+  out.push('<div class="row" style="margin:20px 4px 8px"><h2 class="grow" style="margin:0">Needs attention</h2>' +
+    (me ? '<button class="chip' + (ui.mine ? ' on' : '') + '" data-a="mine">Only mine</button>' : '') + '</div>');
+
+  const taskRow = x => '<div class="li"><div class="grow"><div class="t">' + esc(x.t.name) + '</div><div class="meta">' +
+    esc([x.t.equipment, x.t.responsible ? pname(x.t.responsible) : 'nobody responsible yet'].filter(Boolean).join(' · ')) + '</div></div>' +
+    dueBadge(x.i) + '<button class="btn small" data-a="done" data-id="' + x.t.id + '">' + (x.i.status === 'never' ? 'Add date' : 'Done') + '</button></div>';
+  let any = false;
+  const section = (title, rows) => { if (!rows.length) return; any = true; out.push('<h2>' + title + ' (' + rows.length + ')</h2><div class="card">' + rows.join('') + '</div>'); };
+
+  section('Overdue', overdue.map(taskRow));
+  section('To order', toOrder.map(x => '<div class="li"><div class="grow"><div class="t">' + titleHtml(x.it) + '</div><div class="meta">' +
+    esc(x.i.reason) + ' · ' + esc(x.it.ownerId ? 'in charge: ' + pname(x.it.ownerId) : 'nobody in charge') + '</div></div>' +
+    '<button class="btn small" data-a="goto" data-id="' + x.it.id + '">View</button>' +
+    '<button class="btn small primary" data-a="order" data-id="' + x.it.id + '" data-s="ordered">Mark ordered</button></div>'));
+  section('Expired or expiring', exp.map(x => '<div class="li"><div class="grow"><div class="t">' + titleHtml(x.it) + '</div><div class="meta">lot ' +
+    esc(x.b.lotNo || '–') + ' · ' + fmtNum(Number(x.b.qty) || 0) + ' ' + esc(x.it.unit || '') + '</div></div>' + expBadge(x.b) +
+    (x.b.days < 0 ? '<button class="btn small" data-a="finish" data-id="' + x.b.id + '">Discarded</button>' :
+      '<button class="btn small" data-a="goto" data-id="' + x.it.id + '">View</button>') + '</div>'));
+  section('Due in the next ' + DUE_SOON_DAYS + ' days', soon.map(taskRow));
+  section('Ordered – waiting for delivery', ordered.map(x => '<div class="li"><div class="grow"><div class="t">' + titleHtml(x.it) + '</div><div class="meta">ordered ' +
+    (x.it.orderedOn ? rel(x.it.orderedOn) : '') + (x.it.orderedBy ? ' by ' + esc(x.it.orderedBy) : '') + '</div></div>' +
+    (x.it.kind === 'reagent' ? '<button class="btn small primary" data-a="receive" data-id="' + x.it.id + '">Arrived</button>' :
+      '<button class="btn small primary" data-a="cstat" data-id="' + x.it.id + '" data-s="restocked">Restocked</button>') + '</div>'));
+  section('No “last done” date yet', never.map(taskRow));
+  if (!any) out.push('<div class="card empty">Nothing needs attention right now' + (mine ? ' for you' : '') + '.</div>');
+  return out.join('');
+}
+
+function dutyCard() {
+  const d = S.duty[0], nxt = S.duty[1];
+  const pid = d ? d.personId : '';
+  const sunday = addDays(S.thisMonday, 6);
+  const dutyTasks = S.tasks.filter(t => t.responsible === 'DUTY');
+  const rows = dutyTasks.map(t => {
+    const i = taskInfo(t);
+    const doneWeek = t.lastDone && t.lastDone >= S.thisMonday;
+    const btn = (primary, text) => t.key === 'duty_consumables'
+      ? '<button class="btn small' + (primary ? ' primary' : '') + '" data-a="check">' + (primary ? 'Start check' : 'Check now') + '</button>'
+      : '<button class="btn small' + (primary ? ' primary' : '') + '" data-a="done" data-id="' + t.id + '">' + text + '</button>';
+    let tick, state, b;
+    if (doneWeek) {
+      tick = '<span class="tick done">✓</span>';
+      state = 'done ' + rel(t.lastDone) + (t.lastDoneBy ? ' by ' + esc(t.lastDoneBy) : '');
+      b = '';
+    } else if (!i.next || i.next <= sunday) {
+      const late = i.status === 'overdue';
+      tick = '<span class="tick ' + (late ? 'late' : 'todo') + '"></span>';
+      state = late ? '<span style="color:var(--red)">overdue since ' + pretty(i.next) + '</span>' : (i.next ? 'due ' + rel(i.next) : 'to do this week');
+      b = btn(true, 'Done');
+    } else {
+      tick = '<span class="tick later"></span>';
+      state = 'not this week · next ' + pretty(i.next);
+      b = btn(false, 'Done early');
+    }
+    return '<div class="li">' + tick + '<div class="grow"><div class="t">' + esc(t.name) + '</div><div class="meta">' + state + ' · ' + esc(everyText(t)) + '</div></div>' + b + '</div>';
+  });
+  return '<div class="card duty"><div class="row"><div class="grow meta" style="font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12px">On duty this week</div>' +
+    '<div class="meta">' + weekLabel(S.thisMonday) + '</div></div>' +
+    '<div class="duty-name">' + (pid ? esc(pname(pid)) + (pid === me ? ' <span class="badge b-green">you</span>' : '') : '<span class="meta">Nobody in the rotation yet</span>') + '</div>' +
+    (rows.length ? rows.join('') : '<p class="meta">No weekly duty tasks. In Maintenance, set a task’s “Responsible” to “Weekly duty”.</p>') +
+    '<div class="row meta" style="margin-top:8px"><span class="grow">Next week: <b>' + esc(nxt && nxt.personId ? pname(nxt.personId) : '—') + '</b></span>' +
+    '<button class="btn small ghost" data-a="tab" data-tab="rotation">Rotation →</button></div></div>';
+}
+
+/* Stocks */
+function vStocks() {
+  const isR = ui.kind === 'reagent';
+  const n = k => S.items.filter(i => i.kind === k).length;
+  const cats = isR ? REAGENT_CATS : CONSUMABLE_CATS;
+  const used = Array.from(new Set(S.items.filter(i => i.kind === ui.kind).map(i => i.category).filter(Boolean)));
+  const allCats = cats.concat(used.filter(c => cats.indexOf(c) < 0));
+  return '<div class="row toolbar"><div class="seg"><button data-a="kind" data-k="reagent" class="' + (isR ? 'on' : '') + '">Reagents (' + n('reagent') + ')</button>' +
+    '<button data-a="kind" data-k="consumable" class="' + (!isR ? 'on' : '') + '">Consumables (' + n('consumable') + ')</button></div><span class="grow"></span>' +
+    (isR ? '' : '<button class="btn" data-a="check">Run weekly check</button>') +
+    '<button class="btn primary" data-a="addItem">+ Add ' + (isR ? 'reagent' : 'consumable') + '</button></div>' +
+    '<div class="row filters"><input id="q" type="search" placeholder="Search name, type, lot, cat. no., location…" value="' + esc(ui.q) + '">' +
+    '<select id="cat"><option value="">All categories</option>' + allCats.map(c => '<option' + (c === ui.cat ? ' selected' : '') + '>' + esc(c) + '</option>').join('') + '</select></div>' +
+    '<div id="stocklist">' + stockList() + '</div>';
+}
+function stockList() {
+  const q = ui.q.trim().toLowerCase();
+  let list = S.items.filter(i => i.kind === ui.kind && (!ui.cat || i.category === ui.cat));
+  if (q) list = list.filter(it => {
+    const hay = [it.name, it.variant, it.category, it.supplier, it.catalogNo, it.storage, it.notes, pname(it.ownerId)]
+      .concat(S.batches.filter(b => b.itemId === it.id).map(b => b.lotNo)).join(' ').toLowerCase();
+    return hay.indexOf(q) >= 0;
+  });
+  list.sort((a, b) => cmp(label(a), label(b)));
+  if (!list.length) {
+    if (q || ui.cat) return '<div class="card empty">Nothing matches.</div>';
+    return ui.kind === 'reagent'
+      ? '<div class="card empty">No shared reagents yet.<br>Add the first one — e.g. Geltrex (with its type, lot and expiry).</div>'
+      : '<div class="card empty">No consumables on the list yet.</div>';
+  }
+  return list.map(it => ui.kind === 'reagent' ? reagentCard(it) : consumableCard(it)).join('');
+}
+function reagentCard(it) {
+  const i = itemInfo(it);
+  const open = !!ui.open[it.id];
+  const badges = [];
+  if (i.out) badges.push('<span class="badge b-red">Out of stock</span>');
+  else if (i.low) badges.push('<span class="badge b-amber">Low</span>');
+  if (i.ordered) badges.push('<span class="badge b-blue">Ordered ' + rel(it.orderedOn) + '</span>');
+  else if (it.orderStatus === 'to_order') badges.push('<span class="badge b-amber">To order</span>');
+  if (i.expired.length) badges.push('<span class="badge b-red">' + i.expired.length + ' expired batch' + (i.expired.length > 1 ? 'es' : '') + '</span>');
+  if (i.expiring.length) badges.push(expBadge(i.expiring[0]));
+  const meta = [it.category, it.temp, it.storage].filter(Boolean).join(' · ');
+  let h = '<div class="card"><div class="item-head" data-a="toggle" data-id="' + it.id + '"><div class="grow"><h3>' + titleHtml(it) + '</h3>' +
+    '<div class="meta">' + esc(meta || 'no location yet') + '</div><div class="meta">' + (it.ownerId ? 'In charge: ' + esc(pname(it.ownerId)) : '<span style="color:var(--amber)">Nobody in charge</span>') + '</div>' +
+    (badges.length ? '<div class="badges">' + badges.join('') + '</div>' : '') + '</div>' +
+    '<div class="qty">' + fmtNum(i.total) + ' <small>' + esc(it.unit || 'units') + (i.expiredQty ? ' (+' + fmtNum(i.expiredQty) + ' expired)' : '') + '</small><small>' + (open ? '▲' : '▼') + '</small></div></div>';
+  if (open) {
+    h += '<div class="details">' +
+      dt('Type / variant', it.variant) + dt('Supplier', it.supplier) + dt('Catalog no.', it.catalogNo) +
+      dt('Reorder at', i.min !== null ? '≤ ' + fmtNum(i.min) + ' ' + (it.unit || '') : '') +
+      dt('Use within after opening', it.shelfLifeOpenedDays !== '' ? it.shelfLifeOpenedDays + ' days' : '') +
+      (it.notes ? '<div style="grid-column:1/-1"><span>Notes</span>' + esc(it.notes) + '</div>' : '') + '</div>';
+    if (!i.bs.length) h += '<p class="meta">No batches in stock.</p>';
+    i.bs.forEach(b => {
+      h += '<div class="batch"><div class="row"><div class="grow"><b>Lot ' + esc(b.lotNo || '–') + '</b> · ' + fmtNum(Number(b.qty) || 0) + ' ' + esc(it.unit || '') + ' ' + expBadge(b) +
+        '<div class="meta">' + [b.arrived ? 'arrived ' + pretty(b.arrived) : '', b.expiry ? 'expires ' + pretty(b.expiry, true) : 'no expiry date',
+          b.opened ? 'opened ' + pretty(b.opened) : ''].filter(Boolean).join(' · ') + (b.notes ? ' · ' + esc(b.notes) : '') + '</div></div></div>' +
+        '<div class="row" style="margin-top:8px"><button class="btn small primary" data-a="use1" data-id="' + b.id + '">Took 1</button>' +
+        '<button class="btn small" data-a="use" data-id="' + b.id + '">Took…</button>' +
+        (!b.opened ? '<button class="btn small" data-a="opened" data-id="' + b.id + '">Opened / thawed</button>' : '') +
+        '<button class="btn small" data-a="editBatch" data-id="' + b.id + '">Edit</button>' +
+        '<button class="btn small ghost" data-a="finish" data-id="' + b.id + '">Used up / discarded</button></div></div>';
+    });
+    h += '<div class="actions"><button class="btn primary" data-a="receive" data-id="' + it.id + '">+ New batch arrived</button>' + orderButtons(it, i) +
+      '<button class="btn" data-a="editItem" data-id="' + it.id + '">Edit</button>' +
+      '<button class="btn ghost" data-a="history" data-id="' + it.id + '">History</button></div>';
+  }
+  return h + '</div>';
+}
+function orderButtons(it, i) {
+  if (i.ordered) return '<button class="btn" data-a="order" data-id="' + it.id + '" data-s="">Cancel “ordered”</button>';
+  if (i.needs) return '<button class="btn" data-a="order" data-id="' + it.id + '" data-s="ordered">Mark ordered</button>' +
+    (it.orderStatus === 'to_order' ? '<button class="btn ghost" data-a="order" data-id="' + it.id + '" data-s="">Unflag</button>' : '');
+  return '<button class="btn" data-a="order" data-id="' + it.id + '" data-s="to_order">Flag to order</button>';
+}
+const dt = (k, v) => v === '' || v == null ? '' : '<div><span>' + esc(k) + '</span>' + esc(v) + '</div>';
+function consumableCard(it) {
+  const i = itemInfo(it);
+  const s = it.checkStatus || 'ok';
+  const sb = st => '<button class="' + st + (s === st ? ' on' : '') + '" data-a="cstat" data-id="' + it.id + '" data-s="' + st + '">' + { ok: 'OK', low: 'Low', out: 'Out' }[st] + '</button>';
+  return '<div class="card"><div class="row"><div class="grow"><div class="t">' + titleHtml(it) + '</div><div class="meta">' +
+    esc([it.category, it.storage, it.ownerId ? 'in charge: ' + pname(it.ownerId) : ''].filter(Boolean).join(' · ')) +
+    (it.lastChecked ? ' · checked ' + rel(it.lastChecked) : '') + '</div>' +
+    (i.ordered ? '<div class="badges"><span class="badge b-blue">Ordered ' + rel(it.orderedOn) + '</span></div>' : '') + '</div>' +
+    '<div class="cstat">' + sb('ok') + sb('low') + sb('out') + '</div></div>' +
+    '<div class="row" style="margin-top:8px">' +
+    (i.ordered ? '<button class="btn small primary" data-a="cstat" data-id="' + it.id + '" data-s="restocked">Restocked</button>' :
+      i.needs ? '<button class="btn small" data-a="order" data-id="' + it.id + '" data-s="ordered">Mark ordered</button>' : '') +
+    '<button class="btn small ghost" data-a="editItem" data-id="' + it.id + '">Edit</button></div></div>';
+}
+
+/* Maintenance */
+function vTasks() {
+  const list = S.tasks.map(t => ({ t, i: taskInfo(t) }));
+  const rank = x => x.i.status === 'overdue' ? 0 : x.i.status === 'never' ? 1 : 2;
+  list.sort((a, b) => rank(a) - rank(b) || ((a.i.next || '') < (b.i.next || '') ? -1 : 1));
+  const card = x => {
+    const t = x.t;
+    const done = t.key === 'duty_consumables'
+      ? '<button class="btn small primary" data-a="check">Start check</button><button class="btn small" data-a="done" data-id="' + t.id + '">Mark done</button>'
+      : '<button class="btn small primary" data-a="done" data-id="' + t.id + '">' + (x.i.status === 'never' ? 'Add last done date' : 'Mark done') + '</button>';
+    return '<div class="card"><div class="row" style="align-items:flex-start"><div class="grow"><h3>' + esc(t.name) + '</h3>' +
+      '<div class="meta">' + esc([t.equipment, t.category].filter(Boolean).join(' · ')) + '</div></div>' + dueBadge(x.i) + '</div>' +
+      '<div class="details" style="margin-top:8px">' +
+      '<div><span>Repeats</span>' + esc(everyText(t)) + '</div>' +
+      '<div><span>Responsible</span>' + (t.responsible ? esc(pname(t.responsible)) : '<span style="color:var(--amber)">nobody yet</span>') + '</div>' +
+      '<div><span>Last done</span>' + (t.lastDone ? pretty(t.lastDone, true) + (t.lastDoneBy ? ' · ' + esc(t.lastDoneBy) : '') : '—') + '</div>' +
+      '<div><span>Next due</span>' + (x.i.next ? pretty(x.i.next, true) : '—') + '</div>' +
+      (t.notes ? '<div style="grid-column:1/-1"><span>Notes</span>' + esc(t.notes) + '</div>' : '') + '</div>' +
+      '<div class="actions">' + done + '<button class="btn small" data-a="editTask" data-id="' + t.id + '">Edit</button>' +
+      '<button class="btn small ghost" data-a="history" data-id="' + t.id + '">History</button></div></div>';
+  };
+  const sched = list.filter(x => x.t.responsible !== 'DUTY');
+  const duty = list.filter(x => x.t.responsible === 'DUTY');
+  return '<div class="row toolbar"><p class="meta grow" style="margin:0">Next due = last done + interval. Done early or extra (e.g. after a contamination)? Just mark it done — the next date moves on from there.</p>' +
+    '<button class="btn primary" data-a="addTask">+ Add task</button></div>' +
+    '<h2>Scheduled (' + sched.length + ')</h2>' + (sched.map(card).join('') || '<div class="card empty">No scheduled tasks.</div>') +
+    '<h2>Weekly duty – done by whoever is on rotation (' + duty.length + ')</h2>' + (duty.map(card).join('') || '<div class="card empty">None. Set a task’s responsible to “Weekly duty”.</div>');
+}
+
+/* Rotation */
+function vRotation() {
+  const dutyTasks = S.tasks.filter(t => t.responsible === 'DUTY');
+  const order = S.people.filter(p => isActive(p) && p.inRotation);
+  const away = S.people.filter(p => isActive(p) && p.awayFrom && (!p.awayUntil || p.awayUntil >= S.today));
+  const weeks = S.duty.map((w, idx) => '<div class="week' + (idx === 0 ? ' now' : '') + '"><div class="when">' + (idx === 0 ? '<b>This week</b><br>' : '') + weekLabel(w.weekStart) + '</div>' +
+    '<div class="who">' + (w.personId ? esc(pname(w.personId)) : '<span class="meta">nobody available</span>') + (w.personId === me ? ' <span class="badge b-green">you</span>' : '') +
+    (w.changed ? ' <span class="badge b-blue">changed</span>' : '') + '</div>' +
+    '<button class="btn small" data-a="swap" data-w="' + w.weekStart + '">Swap</button>' +
+    '<button class="btn small ghost" data-a="dutyChange" data-w="' + w.weekStart + '">Change</button></div>').join('');
+  return '<div class="card"><h3>Weekly duty</h3><p class="meta">One person per week (Monday–Sunday) takes care of:</p><ul style="margin:4px 0 0;padding-left:20px">' +
+    (dutyTasks.map(t => '<li>' + esc(t.name) + ' <span class="meta">(' + esc(everyText(t)) + ')</span></li>').join('') || '<li class="meta">nothing yet</li>') + '</ul>' +
+    '<p class="meta">Change what’s included or how often in Maintenance (set “Responsible” to “Weekly duty”).</p></div>' +
+    '<h2>Next weeks</h2><div class="card">' + weeks + '</div>' +
+    '<h2>Order</h2><div class="card"><p class="meta" style="margin-top:0">Goes round in this order. People who are away 3+ weekdays that week are skipped, and so is anyone after their leaving date.</p>' +
+    (order.length ? '<ol class="order">' + order.map(p => '<li>' + esc(p.name) + (p.endDate ? ' <span class="meta">until ' + pretty(p.endDate) + '</span>' : '') + '</li>').join('') + '</ol>' : '<p class="meta">Nobody is in the rotation yet.</p>') +
+    '<div class="actions"><button class="btn small ghost" data-a="tab" data-tab="people">Edit people →</button></div></div>' +
+    '<h2>Away</h2><div class="card">' + (away.length ? away.map(p => '<div class="li"><div class="grow"><b>' + esc(p.name) + '</b> <span class="meta">' + pretty(p.awayFrom) + ' – ' + (p.awayUntil ? pretty(p.awayUntil) : 'open end') + '</span></div></div>').join('') : '<p class="meta" style="margin:0">Nobody has away dates set.</p>') +
+    '<div class="actions"><button class="btn small" data-a="away">Set my away dates</button></div></div>';
+}
+
+/* People */
+function vPeople() {
+  const actives = activePeople();
+  const former = S.people.filter(p => !isActive(p));
+  const card = p => {
+    const b = [];
+    b.push(p.inRotation ? '<span class="badge b-green">In rotation</span>' : '<span class="badge b-grey">Not in rotation</span>');
+    if (p.awayFrom && (!p.awayUntil || p.awayUntil >= S.today)) b.push('<span class="badge b-blue">Away ' + pretty(p.awayFrom) + ' – ' + (p.awayUntil ? pretty(p.awayUntil) : '…') + '</span>');
+    if (p.endDate) b.push('<span class="badge b-amber">Leaves ' + pretty(p.endDate, true) + '</span>');
+    const owns = S.items.filter(i => i.ownerId === p.id).length, tasks = S.tasks.filter(t => t.responsible === p.id).length;
+    return '<div class="card"><div class="row"><div class="grow"><h3>' + esc(p.name) + (p.id === me ? ' <span class="badge b-green">you</span>' : '') + '</h3>' +
+      '<div class="meta">' + esc([p.role, p.email].filter(Boolean).join(' · ')) + '</div>' +
+      '<div class="meta">' + owns + ' stock' + (owns === 1 ? '' : 's') + ' in charge · ' + tasks + ' task' + (tasks === 1 ? '' : 's') + ' responsible</div>' +
+      '<div class="badges">' + b.join('') + '</div></div></div>' +
+      '<div class="actions"><button class="btn small" data-a="editPerson" data-id="' + p.id + '">Edit</button>' +
+      '<button class="btn small ghost danger" data-a="leave" data-id="' + p.id + '">Has left the lab</button></div></div>';
+  };
+  return '<div class="row toolbar"><p class="meta grow" style="margin:0">Everyone working in stem cell culture. Interns: add yourself when you start and set a leaving date — you drop out of the rotation automatically.</p>' +
+    '<button class="btn primary" data-a="join">+ Add person</button></div>' +
+    (actives.map(card).join('') || '<div class="card empty">Nobody yet.</div>') +
+    (former.length ? '<h2><button class="chip" data-a="former">' + (ui.showFormer ? 'Hide' : 'Show') + ' former members (' + former.length + ')</button></h2>' +
+      (ui.showFormer ? '<div class="card">' + former.map(p => '<div class="li"><div class="grow"><b>' + esc(p.name) + '</b> <span class="meta">' + esc(p.role || '') +
+        (p.left ? ' · left ' + pretty(p.left, true) : p.endDate ? ' · until ' + pretty(p.endDate, true) : '') + '</span></div><button class="btn small" data-a="rejoin" data-id="' + p.id + '">Back in the lab</button></div>').join('') + '</div>' : '') : '') +
+    devicesHtml();
+}
+function devicesHtml() {
+  const d = S.device || {};
+  let h = '<h2>Devices</h2><div class="card"><div class="row"><div class="grow"><div class="t">This device: ' + esc(d.name || '?') + (d.admin ? ' <span class="badge b-blue">admin</span>' : '') + '</div>' +
+    '<div class="meta">' + (d.admin ? 'Can create one-time codes and remove devices.' : 'To add another phone or computer, ask an admin for a one-time code.') + '</div></div>' +
+    '<button class="btn small ghost danger" data-a="forget">Sign out this device</button></div></div>';
+  if (!d.admin) return h;
+  const list = S.devices.slice().sort((a, b) => cmp(a.name, b.name));
+  h += '<div class="card"><div class="row" style="margin-bottom:6px"><div class="grow"><b>All devices (' + list.length + ')</b><div class="meta">Each one was unlocked once with a one-time code.</div></div>' +
+    '<button class="btn primary small" data-a="newCode">+ One-time code</button></div>' +
+    list.map(x => '<div class="li"><div class="grow"><div class="t">' + esc(x.name) + (x.id === d.id ? ' <span class="badge b-green">this one</span>' : '') + (x.admin ? ' <span class="badge b-blue">admin</span>' : '') + '</div>' +
+      '<div class="meta">set up ' + (x.created ? pretty(String(x.created).slice(0, 10), true) : '?') + (x.addedBy ? ' · code from ' + esc(x.addedBy) : '') + ' · last used ' + (x.lastSeen ? rel(x.lastSeen) : '—') + '</div></div>' +
+      (x.id === d.id ? '' : '<button class="btn small ghost danger" data-a="revoke" data-id="' + x.id + '">Remove</button>') + '</div>').join('') + '</div>';
+  return h;
+}
+function codeForm() {
+  openForm({
+    title: 'New one-time code', intro: 'Make a code for a new phone, tablet or computer. It works once and expires after 48 hours.',
+    fields: [{ name: 'admin', label: 'Admin device (can make codes and remove devices)', type: 'checkbox', value: false }],
+    submit: 'Create code',
+    onSubmit: async v => {
+      const st = await act('createCode', v.admin);
+      setTimeout(() => showCode(st.result), 0);
+    }
+  });
+}
+function showCode(c) {
+  openForm({
+    title: 'One-time code' + (c.admin ? ' (admin)' : ''), submit: false,
+    fields: [{ type: 'html', html: '<div class="code">' + esc(c.code) + '</div><p class="meta">On the new device, open<br><b>' + esc(location.origin + location.pathname) + '</b><br>and enter this code. It works once and expires in ' + c.hours + ' hours. Don’t post it in a group chat — anyone with it can unlock a device.</p>' +
+      '<div class="actions"><button type="button" class="btn" data-a="copy" data-v="' + esc(c.code) + '">Copy code</button><button type="button" class="btn" data-a="copy" data-v="' + esc('Stem Cell Lab app: ' + location.origin + location.pathname + '\nOne-time code: ' + c.code) + '">Copy link + code</button></div>' }]
+  });
+}
+
+/* Log */
+function vLog() {
+  return '<div class="row filters"><input id="logq" type="search" placeholder="Search the log (name, reagent, task…)" value="' + esc(ui.logQ) + '"></div>' +
+    '<div class="card" id="loglist">' + logList() + '</div><p class="meta">Shows the latest 400 entries. The full log is in the “Log” tab of the Google Sheet.</p>';
+}
+function logList() {
+  const q = ui.logQ.trim().toLowerCase();
+  const list = S.log.filter(l => !q || [l.person, l.action, l.target, l.details].join(' ').toLowerCase().indexOf(q) >= 0);
+  return list.length ? list.map(logEntry).join('') : '<div class="empty">Nothing logged yet.</div>';
+}
+const logEntry = l => '<div class="log-e"><b>' + esc(l.person) + '</b> · ' + esc(l.action) + ' · ' + esc(l.target) +
+  (l.details ? '<div class="meta">' + esc(l.details) + '</div>' : '') + '<div class="meta">' + esc(l.timestamp) + (l.device ? ' · ' + esc(l.device) : '') + '</div></div>';
+
+/* ───────── modal forms ───────── */
+function openModal(html) { $('#modal-body').innerHTML = html; $('#modal').classList.add('open'); }
+function closeModal() { $('#modal').classList.remove('open'); $('#modal-body').innerHTML = ''; }
+function fieldHtml(f) {
+  if (f.type === 'section') return '<div class="fsec">' + esc(f.label) + '</div>';
+  if (f.type === 'html') return f.html;
+  const id = 'f_' + f.name, v = f.value == null ? '' : f.value;
+  const help = f.help != null ? '<div class="help" id="' + id + '_help">' + esc(f.help) + '</div>' : '';
+  if (f.type === 'checkbox') return '<div class="f check"><label><input type="checkbox" id="' + id + '" name="' + f.name + '"' + (v ? ' checked' : '') + '> ' + esc(f.label) + '</label>' + help + '</div>';
+  let input;
+  if (f.type === 'select') {
+    input = '<select id="' + id + '" name="' + f.name + '">' + f.options.map(o => {
+      const val = Array.isArray(o) ? o[0] : o, lab = Array.isArray(o) ? o[1] : (o || '—');
+      return '<option value="' + esc(val) + '"' + (String(val) === String(v) ? ' selected' : '') + '>' + esc(lab) + '</option>';
+    }).join('') + '</select>';
+  } else if (f.type === 'textarea') {
+    input = '<textarea id="' + id + '" name="' + f.name + '" rows="' + (f.rows || 2) + '" placeholder="' + esc(f.placeholder || '') + '">' + esc(v) + '</textarea>';
+  } else {
+    input = '<input id="' + id + '" name="' + f.name + '" type="' + (f.type || 'text') + '" value="' + esc(v) + '" placeholder="' + esc(f.placeholder || '') + '"' +
+      (f.min != null ? ' min="' + f.min + '"' : '') + (f.max ? ' max="' + f.max + '"' : '') + (f.step ? ' step="' + f.step + '"' : '') +
+      (f.type === 'number' ? ' inputmode="decimal"' : '') + ' autocomplete="off">';
+  }
+  return '<div class="f"><label for="' + id + '">' + esc(f.label) + (f.required ? ' *' : '') + '</label>' + input + help + '</div>';
+}
+function fieldsHtml(fields) {
+  let out = '', buf = [];
+  const flush = () => { if (buf.length) { out += '<div class="grid2">' + buf.join('') + '</div>'; buf = []; } };
+  fields.forEach(f => {
+    if (f.half) { buf.push(fieldHtml(f)); if (buf.length === 2) flush(); }
+    else { flush(); out += fieldHtml(f); }
+  });
+  flush();
+  return out;
+}
+function openForm(cfg) {
+  openModal('<form id="mform" novalidate><div class="mhead"><h3>' + esc(cfg.title) + '</h3><button type="button" class="x" data-a="close" aria-label="Close">×</button></div>' +
+    (cfg.intro ? '<p class="meta" style="margin-top:0">' + cfg.intro + '</p>' : '') + fieldsHtml(cfg.fields || []) +
+    '<div class="mfoot">' + (cfg.left || '') + '<button type="button" class="btn" data-a="close">' + (cfg.submit === false ? 'Close' : 'Cancel') + '</button>' +
+    (cfg.submit !== false ? '<button type="submit" class="btn ' + (cfg.danger ? 'danger-fill' : 'primary') + '">' + esc(cfg.submit || 'Save') + '</button>' : '') + '</div></form>');
+  const form = $('#mform');
+  if (cfg.onRender) cfg.onRender(form);
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    for (const f of (cfg.fields || [])) {
+      if (f.required && f.name && !String(form.elements[f.name].value).trim()) {
+        form.elements[f.name].focus(); toast(f.label + ' is needed.', true); return;
+      }
+    }
+    let vals = {};
+    if (cfg.collect) vals = cfg.collect(form);
+    else (cfg.fields || []).forEach(f => { if (f.name) { const el = form.elements[f.name]; vals[f.name] = f.type === 'checkbox' ? el.checked : el.value.trim(); } });
+    const btn = form.querySelector('button[type=submit]');
+    btn.disabled = true;
+    try { await cfg.onSubmit(vals, form); closeModal(); if (cfg.done) toast(cfg.done); }
+    catch (err) { btn.disabled = false; }
+  });
+  if (window.matchMedia('(pointer:fine)').matches) {
+    const first = form.querySelector('.f input:not([type=checkbox]), .f select, .f textarea');
+    if (first) first.focus();
+  }
+}
+function confirmBox(title, text, okLabel, fn, done) {
+  openForm({ title, intro: esc(text), submit: okLabel, danger: true, onSubmit: fn, done });
+}
+
+function personForm(p) {
+  const isNew = !p;
+  const fields = [
+    { name: 'name', label: 'Name', value: p && p.name, required: true },
+    { name: 'role', label: 'Role', type: 'select', options: withCurrent(ROLES, p && p.role), value: p ? p.role : 'Member', half: true },
+    { name: 'email', label: 'Email (optional)', type: 'email', value: p && p.email, half: true },
+    { name: 'inRotation', label: 'Takes part in the weekly duty rotation', type: 'checkbox', value: p ? p.inRotation : true },
+    { name: 'endDate', label: 'Leaving date (optional)', type: 'date', value: p && p.endDate, help: 'e.g. end of internship. After this date they drop out of the rotation and the name list.' }
+  ];
+  if (!isNew) fields.push({ type: 'section', label: 'Away (holiday, conference…)' },
+    { name: 'awayFrom', label: 'From', type: 'date', value: p.awayFrom, half: true },
+    { name: 'awayUntil', label: 'Until', type: 'date', value: p.awayUntil, half: true });
+  openForm({
+    title: isNew ? (me ? 'Add person' : 'Add myself') : 'Edit ' + p.name, fields, done: isNew ? 'Added' : 'Saved',
+    onSubmit: async v => {
+      const st = await act('savePerson', Object.assign({ id: p ? p.id : '' }, v));
+      if (isNew && !me && st.result) { me = st.result; LS.set('me', me); render(); }
+    }
+  });
+}
+function awayForm() {
+  const p = person(me);
+  openForm({
+    title: 'My away dates', intro: 'If you’re away 3+ weekdays of a week, the rotation skips you that week. Leave both empty to clear.',
+    fields: [{ name: 'awayFrom', label: 'From', type: 'date', value: p.awayFrom, half: true }, { name: 'awayUntil', label: 'Until', type: 'date', value: p.awayUntil, half: true }],
+    done: 'Saved', onSubmit: v => act('savePerson', { id: me, awayFrom: v.awayFrom, awayUntil: v.awayUntil })
+  });
+}
+function peopleOptions(cur, emptyLabel) {
+  const opts = [['', emptyLabel]].concat(activePeople().map(p => [p.id, p.name]));
+  if (cur && !opts.some(o => o[0] === cur)) opts.push([cur, pname(cur)]);
+  return opts;
+}
+function itemForm(it, kind) {
+  kind = it ? it.kind : kind;
+  const isR = kind === 'reagent', g = k => it ? it[k] : '';
+  const fields = [
+    { name: 'name', label: isR ? 'Reagent' : 'Item', value: g('name'), required: true, placeholder: isR ? 'e.g. Geltrex, mTeSR Plus, Accutase' : 'e.g. Serological pipettes 10 ml' }
+  ];
+  if (isR) fields.push({ name: 'variant', label: 'Type / variant', value: g('variant'), placeholder: 'e.g. LDEV-free hESC-qualified · reduced growth factor · complete medium' });
+  fields.push(
+    { name: 'category', label: 'Category', type: 'select', options: [''].concat(withCurrent(isR ? REAGENT_CATS : CONSUMABLE_CATS, g('category'))), value: g('category'), half: true },
+    { name: 'ownerId', label: 'In charge of stock', type: 'select', options: peopleOptions(g('ownerId'), '— nobody yet —'), value: it ? it.ownerId : me, half: true }
+  );
+  if (isR) fields.push(
+    { name: 'supplier', label: 'Supplier', value: g('supplier'), half: true },
+    { name: 'catalogNo', label: 'Catalog no.', value: g('catalogNo'), half: true }
+  );
+  fields.push({ name: 'storage', label: 'Where it’s kept', value: g('storage'), placeholder: 'e.g. −20 °C freezer 2, shelf 3, box “Matrix”' });
+  if (isR) fields.push(
+    { name: 'temp', label: 'Storage temperature', type: 'select', options: withCurrent(TEMPS, g('temp')), value: g('temp'), half: true },
+    { name: 'unit', label: 'Counted in', value: it ? it.unit : 'aliquots', placeholder: 'aliquots / bottles / vials', half: true },
+    { name: 'minQty', label: 'Reorder when at or below', type: 'number', min: 0, step: 'any', value: g('minQty'), half: true, help: 'Empty = no low-stock warning' },
+    { name: 'shelfLifeOpenedDays', label: 'Use within … days of opening', type: 'number', min: 0, step: 1, value: g('shelfLifeOpenedDays'), half: true, help: 'e.g. 14 for complete medium' }
+  );
+  fields.push({ name: 'notes', label: 'Notes', type: 'textarea', value: g('notes'), placeholder: isR ? 'e.g. aliquot 1:100 on ice, thaw overnight at 4 °C' : '' });
+  if (isR && !it) fields.push(
+    { type: 'section', label: 'Current stock (optional)' },
+    { name: 'lotNo', label: 'Lot no.', half: true },
+    { name: 'qty', label: 'Quantity', type: 'number', min: 0, step: 'any', half: true },
+    { name: 'arrived', label: 'Arrived', type: 'date', value: S.today, half: true },
+    { name: 'expiry', label: 'Expiry date', type: 'date', half: true }
+  );
+  openForm({
+    title: it ? 'Edit ' + label(it) : isR ? 'Add shared reagent' : 'Add consumable', fields, done: 'Saved',
+    left: it ? '<button type="button" class="btn ghost danger left" data-a="archiveItem" data-id="' + it.id + '">Remove</button>' : '',
+    onSubmit: v => {
+      const o = { id: it ? it.id : '', kind };
+      ['name', 'variant', 'category', 'ownerId', 'supplier', 'catalogNo', 'storage', 'temp', 'unit', 'minQty', 'shelfLifeOpenedDays', 'notes'].forEach(k => { if (k in v) o[k] = v[k]; });
+      if (isR && !it && Number(v.qty) > 0) o.firstBatch = { lotNo: v.lotNo, qty: v.qty, arrived: v.arrived, expiry: v.expiry };
+      return act('saveItem', o).then(st => { if (!it && st.result) ui.open[st.result] = true; render(); });
+    }
+  });
+}
+function batchForm(it, b) {
+  const g = k => b ? b[k] : '';
+  openForm({
+    title: b ? 'Edit batch' : 'New batch arrived', intro: '<b>' + titleHtml(it) + '</b>' + (!b && it.orderStatus ? ' · this clears the “ordered” flag' : ''),
+    fields: [
+      { name: 'lotNo', label: 'Lot no.', value: g('lotNo'), half: true },
+      { name: 'qty', label: 'Quantity (' + (it.unit || 'units') + ')', type: 'number', min: 0, step: 'any', value: g('qty'), required: true, half: true },
+      { name: 'arrived', label: 'Arrived', type: 'date', value: b ? b.arrived : S.today, half: true },
+      { name: 'expiry', label: 'Expiry date', type: 'date', value: g('expiry'), half: true },
+      { name: 'opened', label: 'Opened / thawed on', type: 'date', value: g('opened'), help: it.shelfLifeOpenedDays !== '' ? 'Use within ' + it.shelfLifeOpenedDays + ' days of opening' : 'Leave empty if still sealed' },
+      { name: 'notes', label: 'Notes', value: g('notes') }
+    ],
+    done: 'Saved',
+    onSubmit: v => b ? act('updateBatch', Object.assign({ id: b.id }, v)) : act('addBatch', Object.assign({ itemId: it.id }, v))
+  });
+}
+function useForm(b) {
+  const it = item(b.itemId);
+  openForm({
+    title: 'Took from stock', intro: '<b>' + titleHtml(it) + '</b> · lot ' + esc(b.lotNo || '–') + ' · ' + fmtNum(Number(b.qty) || 0) + ' ' + esc(it.unit || '') + ' left',
+    fields: [{ name: 'amount', label: 'How much (' + (it.unit || 'units') + ')', type: 'number', min: 0, step: 'any', value: 1, required: true }],
+    onSubmit: v => act('useBatch', b.id, v.amount), done: 'Updated'
+  });
+}
+function openedForm(b) {
+  const it = item(b.itemId);
+  openForm({
+    title: 'Opened / thawed', intro: '<b>' + titleHtml(it) + '</b> · lot ' + esc(b.lotNo || '–') +
+      (Number(b.qty) > 1 ? '<br>Marks one ' + esc((it.unit || 'unit').replace(/s$/, '')) + ' as opened — the other ' + fmtNum(Number(b.qty) - 1) + ' stay sealed.' : ''),
+    fields: [{ name: 'date', label: 'Date', type: 'date', value: S.today, max: S.today, required: true,
+      help: it.shelfLifeOpenedDays !== '' ? 'Must be used within ' + it.shelfLifeOpenedDays + ' days after this.' : 'Tip: set “Use within … days of opening” on the reagent to get a warning.' }],
+    onSubmit: v => act('markBatchOpened', b.id, v.date), done: 'Saved'
+  });
+}
+function taskForm(t) {
+  const isNew = !t, g = k => t ? t[k] : '';
+  const resp = [['', '— nobody yet —'], ['DUTY', 'Weekly duty (rotation)']].concat(activePeople().map(p => [p.id, p.name]));
+  if (t && t.responsible && !resp.some(r => r[0] === t.responsible)) resp.push([t.responsible, pname(t.responsible)]);
+  const fields = [];
+  if (isNew) fields.push({ name: 'template', label: 'Start from a suggestion (optional)', type: 'select',
+    options: [['', '— write my own —']].concat(TEMPLATES.map((x, i) => [String(i), x.name + (x.equipment ? ' – ' + x.equipment : '')])) });
+  fields.push(
+    { name: 'name', label: 'Task', value: g('name'), required: true, placeholder: 'e.g. ContraCon decontamination' },
+    { name: 'equipment', label: 'Which equipment / what', value: g('equipment'), placeholder: 'e.g. Incubator 2 (left)' },
+    { name: 'every', label: 'Repeat every', type: 'number', min: 1, step: 1, value: t ? t.every : 1, required: true, half: true },
+    { name: 'unit', label: 'Unit', type: 'select', options: [['days', 'days'], ['weeks', 'weeks'], ['months', 'months']], value: t ? t.unit : 'months', half: true },
+    { name: 'responsible', label: 'Responsible', type: 'select', options: resp, value: g('responsible'), half: true },
+    { name: 'category', label: 'Category', type: 'select', options: withCurrent(TASK_CATS, g('category')), value: t ? t.category : 'Equipment', half: true }
+  );
+  if (isNew) fields.push({ name: 'lastDone', label: 'Last done (if known)', type: 'date', max: S.today, help: 'The next due date is counted from this.' });
+  fields.push({ name: 'notes', label: 'Notes / how-to', type: 'textarea', value: g('notes') });
+  openForm({
+    title: isNew ? 'Add maintenance task' : 'Edit task', fields, done: isNew ? 'Task added' : 'Saved',
+    left: t ? '<button type="button" class="btn ghost danger left" data-a="archiveTask" data-id="' + t.id + '">Remove</button>' : '',
+    onRender: form => {
+      const s = form.elements.template;
+      if (s) s.addEventListener('change', () => {
+        const x = TEMPLATES[+s.value]; if (!s.value || !x) return;
+        form.elements.name.value = x.name; form.elements.equipment.value = x.equipment || '';
+        form.elements.every.value = x.every; form.elements.unit.value = x.unit; form.elements.category.value = x.category;
+      });
+    },
+    onSubmit: v => { delete v.template; return act('saveTask', Object.assign({ id: t ? t.id : '' }, v)); }
+  });
+}
+function doneForm(t) {
+  openForm({
+    title: t.lastDone ? 'Mark as done' : 'When was it last done?', intro: '<b>' + esc(taskLabel(t)) + '</b> · ' + esc(everyText(t)),
+    fields: [
+      { name: 'date', label: 'Done on', type: 'date', value: S.today, max: S.today, required: true, help: '' },
+      { name: 'note', label: 'Note (optional)', type: 'textarea', placeholder: 'e.g. extra run after contamination in incubator 2' }
+    ],
+    done: 'Saved',
+    onRender: form => {
+      const upd = () => {
+        const d = form.elements.date.value, h = $('#f_date_help');
+        if (!h) return;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) { h.textContent = ''; return; }
+        const later = t.lastDone && t.lastDone > d;
+        h.textContent = 'Next due: ' + pretty(addEvery(later ? t.lastDone : d, t.every, t.unit), true) + (later ? ' (a later date is already recorded)' : '');
+      };
+      form.elements.date.addEventListener('input', upd); form.elements.date.addEventListener('change', upd); upd();
+    },
+    onSubmit: v => act('markTaskDone', t.id, v.date, v.note)
+  });
+}
+function checkForm() {
+  const items = S.items.filter(i => i.kind === 'consumable').sort((a, b) => cmp(a.category || 'zzz', b.category || 'zzz') || cmp(a.name, b.name));
+  if (!items.length) { toast('No consumables on the list yet — add some under Stocks → Consumables.', true); return; }
+  let html = '', cat = null;
+  items.forEach(it => {
+    if (it.category !== cat) { cat = it.category; html += '<div class="fsec" style="margin-top:10px">' + esc(cat || 'Other') + '</div>'; }
+    const cur = it.checkStatus || 'ok';
+    html += '<div class="ck"><div class="grow"><div class="t" style="font-weight:500">' + esc(it.name) + '</div>' + (it.storage ? '<div class="meta">' + esc(it.storage) + '</div>' : '') +
+      (it.orderStatus === 'ordered' ? '<span class="badge b-blue">ordered</span>' : '') + '</div><div class="seg3">' +
+      ['ok', 'low', 'out'].map(s => '<label><input type="radio" name="c_' + it.id + '" value="' + s + '"' + (cur === s ? ' checked' : '') + '><span class="' + s + '">' + { ok: 'OK', low: 'Low', out: 'Out' }[s] + '</span></label>').join('') +
+      '</div></div>';
+  });
+  openForm({
+    title: 'Weekly consumables check', intro: 'Go through the shelves and mark what’s running low or out. These show up under “To order” on Home, so whoever orders can see them.',
+    fields: [{ type: 'html', html: html }], submit: 'Save check', done: 'Check saved',
+    collect: form => { const r = {}; items.forEach(it => { const el = form.querySelector('input[name="c_' + it.id + '"]:checked'); if (el) r[it.id] = el.value; }); return r; },
+    onSubmit: r => act('submitConsumableCheck', r)
+  });
+}
+function dutyChangeForm(w) {
+  const wk = S.duty.find(x => x.weekStart === w);
+  openForm({
+    title: 'Who’s on duty?', intro: 'Week of ' + weekLabel(w),
+    fields: [{ name: 'person', label: 'Person', type: 'select', value: wk.changed ? wk.personId : '',
+      options: [['', 'Automatic rotation (' + (pname(wk.baseId) || 'nobody') + ')']].concat(activePeople().map(p => [p.id, p.name])) }],
+    done: 'Saved', onSubmit: v => act('setDutyPerson', w, v.person)
+  });
+}
+function swapForm(w) {
+  const wk = S.duty.find(x => x.weekStart === w);
+  openForm({
+    title: 'Swap weeks', intro: esc(pname(wk.personId) || 'Nobody') + ' · week of ' + weekLabel(w),
+    fields: [{ name: 'other', label: 'Swap with', type: 'select',
+      options: S.duty.filter(x => x.weekStart !== w).map(x => [x.weekStart, weekLabel(x.weekStart) + ' – ' + (pname(x.personId) || 'nobody')]) }],
+    submit: 'Swap', done: 'Swapped', onSubmit: v => act('swapDuty', w, v.other)
+  });
+}
+function historyModal(id) {
+  const t = task(id), it = item(id);
+  const entries = S.log.filter(l => l.targetId === id);
+  openForm({
+    title: 'History', intro: '<b>' + esc(t ? taskLabel(t) : label(it)) + '</b>', submit: false,
+    fields: [{ type: 'html', html: entries.length ? entries.map(logEntry).join('') : '<p class="meta">Nothing logged yet (only the latest 400 log entries are searched).</p>' }]
+  });
+}
+
+/* ───────── events ───────── */
+const H = {
+  tab: d => { tab = d.tab; LS.set('tab', tab); render(); window.scrollTo(0, 0); },
+  reload: () => load(),
+  close: () => closeModal(),
+  mine: () => { ui.mine = !ui.mine; LS.set('mine', ui.mine ? '1' : ''); render(); },
+  join: () => personForm(null),
+  kind: d => { ui.kind = d.k; ui.cat = ''; render(); },
+  toggle: d => { ui.open[d.id] = !ui.open[d.id]; $('#stocklist').innerHTML = stockList(); },
+  goto: d => { const it = item(d.id); if (!it) return; tab = 'stocks'; LS.set('tab', tab); ui.kind = it.kind; ui.q = ''; ui.cat = ''; ui.open[it.id] = true; render(); window.scrollTo(0, 0); },
+  addItem: () => need() && itemForm(null, ui.kind),
+  editItem: d => need() && itemForm(item(d.id)),
+  archiveItem: d => { const it = item(d.id); confirmBox('Remove ' + label(it) + '?', 'It disappears from the list (it stays in the Google Sheet and the log).', 'Remove', () => act('archiveItem', it.id), 'Removed'); },
+  receive: d => need() && batchForm(item(d.id), null),
+  editBatch: d => { const b = batch(d.id); need() && batchForm(item(b.itemId), b); },
+  use1: d => need() && act('useBatch', d.id, 1).then(() => toast('1 taken')).catch(() => {}),
+  use: d => need() && useForm(batch(d.id)),
+  opened: d => need() && openedForm(batch(d.id)),
+  finish: d => { if (!need()) return; const b = batch(d.id), it = item(b.itemId); confirmBox('Batch finished?', label(it) + ', lot ' + (b.lotNo || '–') + ' — mark as used up / discarded.', 'Yes, remove batch', () => act('finishBatch', b.id), 'Batch removed'); },
+  order: d => need() && act('setOrderStatus', d.id, d.s).then(() => toast(d.s === 'ordered' ? 'Marked as ordered' : d.s === 'to_order' ? 'Flagged to order' : 'Updated')).catch(() => {}),
+  cstat: d => need() && act('setConsumableStatus', d.id, d.s).then(() => toast(d.s === 'restocked' ? 'Restocked' : 'Saved')).catch(() => {}),
+  check: () => need() && checkForm(),
+  addTask: () => need() && taskForm(null),
+  editTask: d => need() && taskForm(task(d.id)),
+  archiveTask: d => { const t = task(d.id); confirmBox('Remove task?', taskLabel(t) + ' — it disappears from the list (history stays in the Google Sheet).', 'Remove', () => act('archiveTask', t.id), 'Removed'); },
+  done: d => need() && doneForm(task(d.id)),
+  history: d => historyModal(d.id),
+  swap: d => need() && swapForm(d.w),
+  dutyChange: d => need() && dutyChangeForm(d.w),
+  away: () => need() && awayForm(),
+  editPerson: d => personForm(person(d.id)),
+  leave: d => { if (!need()) return; const p = person(d.id); confirmBox(p.name + ' has left?', 'They are removed from the rotation and the name list. Their history stays.', 'Yes, has left', () => act('leavePerson', p.id), 'Updated'); },
+  rejoin: d => need() && act('rejoinPerson', d.id).catch(() => {}),
+  former: () => { ui.showFormer = !ui.showFormer; render(); },
+  newCode: () => codeForm(),
+  revoke: d => { const x = S.devices.find(v => v.id === d.id); confirmBox('Remove “' + x.name + '”?', 'This device will need a new one-time code to use the app again.', 'Remove device', () => act('revokeDevice', x.id), 'Device removed'); },
+  forget: () => confirmBox('Sign out this device?', 'You’ll need a new one-time code from an admin to use the app on this device again.' + (S.device && S.device.admin && S.devices.filter(x => x.admin).length < 2 ? ' This is the only admin device – you could still make a new admin code from the Google Sheet menu “Lab app”.' : ''), 'Sign out', async () => {
+    await rpc('forgetThisDevice', me).catch(() => {});
+    lostAccess('');
+  }),
+  copy: async (d, el) => { try { await navigator.clipboard.writeText(d.v); toast('Copied'); } catch (e) { toast('Couldn’t copy – select the code and copy it manually.', true); } }
+};
+document.addEventListener('click', e => {
+  if (e.target.id === 'modal') { closeModal(); return; }
+  const el = e.target.closest('[data-a]');
+  if (!el) return;
+  const f = H[el.dataset.a];
+  if (f) { e.preventDefault(); f(el.dataset, el); }
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#modal').classList.contains('open')) closeModal(); });
+document.addEventListener('input', e => {
+  if (e.target.id === 'q') { ui.q = e.target.value; $('#stocklist').innerHTML = stockList(); }
+  if (e.target.id === 'logq') { ui.logQ = e.target.value; $('#loglist').innerHTML = logList(); }
+});
+document.addEventListener('change', e => {
+  if (e.target.id === 'cat') { ui.cat = e.target.value; $('#stocklist').innerHTML = stockList(); }
+  if (e.target.id === 'me') {
+    const v = e.target.value;
+    if (v === '__join') { e.target.value = me; personForm(null); return; }
+    me = v; LS.set('me', me); render();
+  }
+});
+document.addEventListener('submit', e => { if (e.target.id === 'pairform') { e.preventDefault(); pair(e.target); } });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && TOKEN && S && Date.now() - lastLoad > 60000 && !$('#modal').classList.contains('open')) load(true);
+});
+load();
+</script>
+</body>
+</html>
