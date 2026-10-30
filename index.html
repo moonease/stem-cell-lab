@@ -324,7 +324,10 @@ async function rpc(action, ...args) {
     try {
       // sent as text/plain so the browser makes a "simple" cross-site request to Google (no CORS preflight)
       res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action, args, token: TOKEN }) });
-    } catch (e) { throw new Error('Can’t reach the lab server. Check the internet connection and try again.'); }
+    } catch (e) {
+      throw new Error(navigator.onLine === false ? 'You’re offline. Check the internet connection and try again.' :
+        'Can’t reach the lab server. If the internet works: the Apps Script deployment is probably still the old version, or “Who has access” isn’t “Anyone”. Opening the server link should show “The lab app server is running”.');
+    }
     try { j = await res.json(); } catch (e) { throw new Error('The server gave an unexpected answer. Is the Apps Script web app deployed with access “Anyone”?'); }
     if (!j.ok) { const err = new Error(j.error || 'Something went wrong'); err.auth = !!j.auth; throw err; }
     return j.result;
