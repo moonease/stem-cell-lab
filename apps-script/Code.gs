@@ -149,8 +149,11 @@ function newAdminCode() { showCode_(true); }
 function newDeviceCode() { showCode_(false); }
 function showCode_(admin) {
   const c = withLock_(function () { return makeCode_(admin, 'Google Sheet'); });
-  SpreadsheetApp.getUi().alert('One-time code for ' + (admin ? 'an ADMIN device' : 'a device') + ':\n\n' + c.code +
-    '\n\nWorks once, valid for ' + CODE_HOURS + ' hours. Open the app on the new device and enter it.');
+  const msg = 'One-time code for ' + (admin ? 'an ADMIN device' : 'a device') + ':  ' + c.code +
+    '   (works once, valid ' + CODE_HOURS + ' h – open the app on the new device and enter it)';
+  console.log(msg);
+  try { SpreadsheetApp.getUi().alert(msg); } catch (e) { /* run from the editor: the code is in the Execution log */ }
+  return msg;
 }
 
 /** Creates missing tabs, headers and formats, and adds the starting tasks/consumables. Safe to run again. */
